@@ -31,7 +31,7 @@ const configs = [
 configs.push({
   input: `src/composables/useCanvas/index.ts`,
   output: {
-    file: `/dist/index.d.ts`,
+    file: `dist/index.d.ts`,
     format: "es",
   },
   plugins: [dts()],
