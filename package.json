@@ -1,7 +1,8 @@
 {
-  "name": "@spicez/v-use-edit-image",
+  "name": "v-use-edit-image",
   "version": "0.0.1",
   "description": "This is vue composition-api library to edit image on canvas.",
+  "main": "dist",
   "scripts": {
     "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
