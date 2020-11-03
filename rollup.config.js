@@ -5,7 +5,7 @@ import pkg from "./package.json";
 
 const configs = [
   {
-    input: "src/composables/useCanvas/index.ts",
+    input: "src/index.ts",
     output: [
       {
         file: pkg.main,
@@ -53,7 +53,7 @@ const configs = [
 ];
 
 configs.push({
-  input: `src/composables/useCanvas/index.ts`,
+  input: `src/index.ts`,
   output: {
     file: `dist/index.d.ts`,
     format: "es",
