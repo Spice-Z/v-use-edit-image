@@ -3,6 +3,11 @@ import dts from "rollup-plugin-dts";
 import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
 
+const globals = {
+  "vue-demi": "VueDemi",
+  "@vueuse/core": "VueUse",
+};
+
 const configs = [
   {
     input: "src/index.ts",
@@ -11,17 +16,13 @@ const configs = [
         file: pkg.main,
         format: "umd",
         name: "v-use-edit-image",
-        globals: {
-          "vue-demi": "VueDemi",
-        },
+        globals,
       },
       {
         file: `dist/index.umd.min.js`,
         format: "umd",
         name: "v-use-edit-image",
-        globals: {
-          "vue-demi": "VueDemi",
-        },
+        globals,
         plugins: [
           terser({
             format: {
