@@ -47,42 +47,6 @@ export const useCropCanvasInfo = (optoins: {
   });
 
   const hideBoxPositions = computed(() => {
-    if (
-      mousePositionFromCanvas.value.x < 0 ||
-      mousePositionFromCanvas.value.y < 0 ||
-      cropArea.width < 0 ||
-      cropArea.height < 0 ||
-      mousePositionFromCanvas.value.x > canvasDOMInfo.value.width ||
-      mousePositionFromCanvas.value.y > canvasDOMInfo.value.height
-    ) {
-      return {
-        top: {
-          top: "0px",
-          left: "0px",
-          right: "0px",
-          bottom: "0px",
-        },
-        left: {
-          top: "0px",
-          left: "0px",
-          right: "0px",
-          bottom: "0px",
-        },
-        right: {
-          top: "0px",
-          left: "0px",
-          right: "0px",
-          bottom: "0px",
-        },
-        bottom: {
-          top: "0px",
-          left: "0px",
-          right: "0px",
-          bottom: "0px",
-        },
-      };
-    }
-
     return {
       top: {
         top: "0px",
