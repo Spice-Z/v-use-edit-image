@@ -3,6 +3,7 @@ import { useMouse, useEventListener } from "@vueuse/core";
 
 export const useCropCanvasInfo = (optoins: {
   canvasRef: Ref<HTMLCanvasElement | null>;
+  cropAspectHeightRatio?: number;
 }) => {
   const { x, y } = useMouse();
   const pageX = ref(window.pageXOffset);
@@ -102,7 +103,10 @@ export const useCropCanvasInfo = (optoins: {
       return;
     }
     cropArea.width = mousePositionFromCanvas.value.x - cropArea.start.x;
-    cropArea.height = mousePositionFromCanvas.value.y - cropArea.start.y;
+    cropArea.height =
+      optoins.cropAspectHeightRatio === undefined
+        ? mousePositionFromCanvas.value.y - cropArea.start.y
+        : cropArea.width * optoins.cropAspectHeightRatio;
   });
   useEventListener("mouseup", (_) => {
     isCropping.value = false;
