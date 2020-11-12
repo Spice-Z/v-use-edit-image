@@ -1,16 +1,30 @@
-import { ref, computed, reactive, Ref } from "vue-demi";
-import { useMouseInElement, useEventListener } from "@vueuse/core";
+import { computed, reactive, Ref } from "vue-demi";
+import { useEventListener } from "@vueuse/core";
+import { useSelectedArea } from "../shared/useSelectedArea";
 
 export const useMaskCanvasInfo = (optoins: {
   canvasRef: Ref<HTMLCanvasElement | null>;
   cropAspectHeightRatio?: number;
 }) => {
-  const { elementX, elementY, isOutside } = useMouseInElement(
-    optoins.canvasRef
+  const { selectedArea, isDragging, isOutside } = useSelectedArea(
+    optoins.canvasRef,
+    {
+      ...(optoins.cropAspectHeightRatio
+        ? { cropAspectHeightRatio: optoins.cropAspectHeightRatio }
+        : {}),
+    }
   );
 
-  const isCropping = ref<Boolean>(false);
-  type selectedArea = {
+  const cropAreaStyle = computed(() => {
+    return {
+      top: `${selectedArea.start.y}px`,
+      left: `${selectedArea.start.x}px`,
+      width: `${selectedArea.width}px`,
+      height: `${selectedArea.height}px`,
+    };
+  });
+
+  type ISelectedArea = {
     start: {
       x: number;
       y: number;
@@ -18,67 +32,17 @@ export const useMaskCanvasInfo = (optoins: {
     width: number;
     height: number;
   };
-  const initialSelectedArea = {
-    start: {
-      x: 0,
-      y: 0,
-    },
-    width: 0,
-    height: 0,
-  };
-  const cropArea = reactive<selectedArea>(
-    Object.assign({}, initialSelectedArea)
-  );
-  const cropAreaStyle = computed(() => {
-    return {
-      top: `${cropArea.start.y}px`,
-      left: `${cropArea.start.x}px`,
-      width: `${cropArea.width}px`,
-      height: `${cropArea.height}px`,
-    };
-  });
+  const maskAreas = reactive<ISelectedArea[]>([]);
 
-  const maskAreas = reactive<selectedArea[]>([]);
-
-  useEventListener("mousedown", (_) => {
-    isCropping.value = true;
-    if (isOutside.value) {
-      return;
-    }
-
-    cropArea.start = {
-      x: elementX.value,
-      y: elementY.value,
-    };
-    // リセット
-    cropArea.width = initialSelectedArea.width;
-    cropArea.height = initialSelectedArea.height;
-  });
-  useEventListener("mousemove", (_) => {
-    if (!isCropping.value) {
-      return;
-    }
-    cropArea.width = elementX.value - cropArea.start.x;
-    cropArea.height =
-      optoins.cropAspectHeightRatio === undefined
-        ? elementY.value - cropArea.start.y
-        : cropArea.width * optoins.cropAspectHeightRatio;
-  });
   useEventListener("mouseup", (_) => {
-    isCropping.value = false;
-
     if (!isOutside.value) {
-      maskAreas.push(Object.assign({}, cropArea));
+      maskAreas.push(Object.assign({}, selectedArea));
     }
-    // リセット
-    cropArea.start = initialSelectedArea.start;
-    cropArea.width = initialSelectedArea.width;
-    cropArea.height = initialSelectedArea.height;
   });
 
   return {
-    cropArea,
-    isCropping,
+    cropArea: selectedArea,
+    isCropping: isDragging,
     maskAreas,
     cropAreaStyle,
   };
