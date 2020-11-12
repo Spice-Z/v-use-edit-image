@@ -7,7 +7,15 @@ export const useSelectedArea = (
     selectAspectHeightRatio?: number;
   }
 ) => {
-  const { elementX, elementY, isOutside } = useMouseInElement(target);
+  const {
+    elementX,
+    elementY,
+    isOutside,
+    elementPositionX,
+    elementPositionY,
+    elementHeight,
+    elementWidth,
+  } = useMouseInElement(target);
 
   const isDragging = ref<Boolean>(false);
   type selectedArea = {
@@ -33,15 +41,13 @@ export const useSelectedArea = (
   useEventListener("mousedown", (_) => {
     isDragging.value = true;
 
-    // リセット
-    selectedArea.start = initialSelectedArea.start;
-    selectedArea.width = initialSelectedArea.width;
-    selectedArea.height = initialSelectedArea.height;
-
     if (isOutside.value) {
       return;
     }
 
+    // リセット
+    selectedArea.width = initialSelectedArea.width;
+    selectedArea.height = initialSelectedArea.height;
     selectedArea.start = {
       x: elementX.value,
       y: elementY.value,
@@ -65,5 +71,9 @@ export const useSelectedArea = (
     selectedArea,
     isDragging,
     isOutside,
+    targetPositionX: elementPositionX,
+    targetPositionY: elementPositionY,
+    targetHeight: elementHeight,
+    targetWidth: elementWidth,
   };
 };
