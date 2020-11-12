@@ -10,7 +10,7 @@ export const useMaskCanvasInfo = (optoins: {
     optoins.canvasRef,
     {
       ...(optoins.cropAspectHeightRatio
-        ? { cropAspectHeightRatio: optoins.cropAspectHeightRatio }
+        ? { selectAspectHeightRatio: optoins.cropAspectHeightRatio }
         : {}),
     }
   );

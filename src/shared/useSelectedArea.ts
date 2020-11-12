@@ -4,7 +4,7 @@ import { useMouseInElement, useEventListener } from "@vueuse/core";
 export const useSelectedArea = (
   target: Ref<HTMLCanvasElement | null>,
   optoins?: {
-    cropAspectHeightRatio?: number;
+    selectAspectHeightRatio?: number;
   }
 ) => {
   const { elementX, elementY, isOutside } = useMouseInElement(target);
@@ -53,9 +53,9 @@ export const useSelectedArea = (
     }
     selectedArea.width = elementX.value - selectedArea.start.x;
     selectedArea.height =
-      optoins?.cropAspectHeightRatio === undefined
+      optoins?.selectAspectHeightRatio === undefined
         ? elementY.value - selectedArea.start.y
-        : selectedArea.width * optoins.cropAspectHeightRatio;
+        : selectedArea.width * optoins.selectAspectHeightRatio;
   });
   useEventListener("mouseup", (_) => {
     isDragging.value = false;
