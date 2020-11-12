@@ -26,7 +26,9 @@ export const useMaskCanvasInfo = (optoins: {
     width: 0,
     height: 0,
   };
-  const cropArea = reactive<selectedArea>(initialSelectedArea);
+  const cropArea = reactive<selectedArea>(
+    Object.assign({}, initialSelectedArea)
+  );
   const cropAreaStyle = computed(() => {
     return {
       top: `${cropArea.start.y}px`,
