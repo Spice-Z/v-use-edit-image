@@ -18,7 +18,7 @@
   "dependencies": {
     "@vue/composition-api": "^1.0.0-beta.18",
     "@vueuse/core": "^4.0.0-beta.30",
-    "vue-demi": "^0.4.0"
+    "vue-demi": "^0.4.3"
   },
   "devDependencies": {
     "rollup": "^2.32.1",
@@ -27,6 +27,9 @@
     "rollup-plugin-typescript2": "^0.29.0",
     "rollup-plugin-uglify": "^6.0.4",
     "typescript": "^4.0.5"
+  },
+  "peerDependencies": {
+    "vue": "^2.0.0 || >=3.0.0-rc.0"
   },
   "repository": {
     "type": "git",
