@@ -7,7 +7,7 @@ export const useMaskCanvasInfo = (optoins: {
   cropAspectHeightRatio?: number;
 }) => {
   const {
-    selectedArea,
+    resolvedSelectedArea,
     isDragging,
     isOutside,
     area2CanvasArea,
@@ -17,12 +17,12 @@ export const useMaskCanvasInfo = (optoins: {
       : {}),
   });
 
-  const cropAreaStyle = computed(() => {
+  const maskAreaStyle = computed(() => {
     return {
-      top: `${selectedArea.start.y}px`,
-      left: `${selectedArea.start.x}px`,
-      width: `${selectedArea.width}px`,
-      height: `${selectedArea.height}px`,
+      top: `${resolvedSelectedArea.value.start.y}px`,
+      left: `${resolvedSelectedArea.value.start.x}px`,
+      width: `${resolvedSelectedArea.value.width}px`,
+      height: `${resolvedSelectedArea.value.height}px`,
     };
   });
 
@@ -38,15 +38,15 @@ export const useMaskCanvasInfo = (optoins: {
 
   useEventListener("mouseup", (_) => {
     if (!isOutside.value) {
-      maskAreas.push(Object.assign({}, selectedArea));
+      maskAreas.push(Object.assign({}, resolvedSelectedArea.value));
     }
   });
 
   return {
-    cropArea: selectedArea,
+    maskArea: resolvedSelectedArea.value,
+    maskAreas,
     isCropping: isDragging,
     area2CanvasArea,
-    maskAreas,
-    cropAreaStyle,
+    maskAreaStyle,
   };
 };
