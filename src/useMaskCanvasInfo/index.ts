@@ -1,4 +1,4 @@
-import { computed, reactive, Ref } from "vue-demi";
+import { computed, ref, Ref } from "vue-demi";
 import { useEventListener } from "@vueuse/core";
 import { useSelectedArea } from "../shared/useSelectedArea";
 
@@ -34,17 +34,21 @@ export const useMaskCanvasInfo = (optoins: {
     width: number;
     height: number;
   };
-  const maskAreas = reactive<ISelectedArea[]>([]);
+  const maskAreas = ref<ISelectedArea[]>([]);
+  const resetMaskAreas = () => {
+    maskAreas.value = [];
+  };
 
   useEventListener("mouseup", (_) => {
     if (!isOutside.value) {
-      maskAreas.push(Object.assign({}, resolvedSelectedArea.value));
+      maskAreas.value.push(Object.assign({}, resolvedSelectedArea.value));
     }
   });
 
   return {
     maskArea: resolvedSelectedArea.value,
     maskAreas,
+    resetMaskAreas,
     isCropping: isDragging,
     area2CanvasArea,
     maskAreaStyle,

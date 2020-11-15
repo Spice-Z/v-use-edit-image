@@ -111,7 +111,6 @@ export const useSelectedArea = (
   });
 
   return {
-    selectedArea,
     resolvedSelectedArea,
     area2CanvasArea,
     isDragging,
