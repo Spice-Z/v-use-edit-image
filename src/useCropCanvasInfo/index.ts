@@ -7,12 +7,10 @@ export const useCropCanvasInfo = (optoins: {
   cropAspectHeightRatio?: number;
 }) => {
   const {
-    selectedArea,
+    resolvedSelectedArea,
     area2CanvasArea,
     isDragging,
     isOutside,
-    // targetPositionX,
-    // targetPositionY,
     targetHeight,
     targetWidth,
   } = useSelectedArea(optoins.canvasRef, {
@@ -31,25 +29,31 @@ export const useCropCanvasInfo = (optoins: {
         top: "0px",
         left: "0px",
         right: "0px",
-        bottom: `${targetHeight.value - selectedArea.start.y}px`,
+        bottom: `${targetHeight.value - resolvedSelectedArea.value.start.y}px`,
       },
       left: {
-        top: `${selectedArea.start.y}px`,
+        top: `${resolvedSelectedArea.value.start.y}px`,
         left: "0px",
-        right: `${targetWidth.value - selectedArea.start.x}px`,
+        right: `${targetWidth.value - resolvedSelectedArea.value.start.x}px`,
         bottom: "0px",
       },
       right: {
-        top: `${selectedArea.start.y}px`,
-        left: `${selectedArea.start.x + selectedArea.width}px`,
+        top: `${resolvedSelectedArea.value.start.y}px`,
+        left: `${
+          resolvedSelectedArea.value.start.x + resolvedSelectedArea.value.width
+        }px`,
         right: "0px",
         bottom: "0px",
       },
       bottom: {
-        top: `${selectedArea.start.y + selectedArea.height}px`,
-        left: `${selectedArea.start.x}px`,
+        top: `${
+          resolvedSelectedArea.value.start.y + resolvedSelectedArea.value.height
+        }px`,
+        left: `${resolvedSelectedArea.value.start.x}px`,
         right: `${
-          targetWidth.value - selectedArea.start.x - selectedArea.width
+          targetWidth.value -
+          resolvedSelectedArea.value.start.x -
+          resolvedSelectedArea.value.width
         }px`,
         bottom: "0px",
       },
@@ -65,7 +69,7 @@ export const useCropCanvasInfo = (optoins: {
   });
 
   return {
-    cropArea: selectedArea,
+    cropArea: resolvedSelectedArea,
     isCropping: isDragging,
     area2CanvasArea,
     hideBoxPositions,

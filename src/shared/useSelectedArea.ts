@@ -1,4 +1,4 @@
-import { ref, reactive, Ref } from "vue-demi";
+import { ref, reactive, Ref, computed } from "vue-demi";
 import { useMouseInElement, useEventListener } from "@vueuse/core";
 
 export const useSelectedArea = (
@@ -18,7 +18,7 @@ export const useSelectedArea = (
   } = useMouseInElement(target);
 
   const isDragging = ref<Boolean>(false);
-  type selectedArea = {
+  type IselectedArea = {
     start: {
       x: number;
       y: number;
@@ -34,10 +34,36 @@ export const useSelectedArea = (
     width: 0,
     height: 0,
   };
-  const selectedArea = reactive<selectedArea>(
+  const selectedArea = reactive<IselectedArea>(
     Object.assign({}, initialSelectedArea)
   );
-  const area2CanvasArea = (area: selectedArea) => {
+  const resolvedSelectedArea = computed(
+    (): IselectedArea => {
+      const width =
+        selectedArea.width < 0 ? selectedArea.width * -1 : selectedArea.width;
+      const height =
+        selectedArea.height < 0
+          ? selectedArea.height * -1
+          : selectedArea.height;
+      const x =
+        selectedArea.width < 0
+          ? selectedArea.start.x - width
+          : selectedArea.start.x;
+      const y =
+        selectedArea.height < 0
+          ? selectedArea.start.y - height
+          : selectedArea.start.y;
+      return {
+        start: {
+          x,
+          y,
+        },
+        width,
+        height,
+      };
+    }
+  );
+  const area2CanvasArea = (area: IselectedArea) => {
     if (target.value === null) {
       return selectedArea;
     }
@@ -86,6 +112,7 @@ export const useSelectedArea = (
 
   return {
     selectedArea,
+    resolvedSelectedArea,
     area2CanvasArea,
     isDragging,
     isOutside,
