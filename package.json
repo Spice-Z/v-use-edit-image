@@ -1,6 +1,6 @@
 {
   "name": "v-use-edit-image",
-  "version": "0.0.3",
+  "version": "0.3.0",
   "description": "This is vue composition-api library to edit image on canvas.",
   "main": "dist/index.umd.js",
   "types": "dist/index.d.ts",
@@ -16,7 +16,7 @@
   "author": "Spice-Z<https://github.com/Spice-Z/>",
   "license": "MIT",
   "dependencies": {
-    "@vue/composition-api": "^1.0.0-beta.18",
+    "@vue/composition-api": "^1.0.0-beta.19",
     "@vueuse/core": "^4.0.0-beta.30",
     "vue-demi": "^0.4.3"
   },
