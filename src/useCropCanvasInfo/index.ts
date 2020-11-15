@@ -59,6 +59,14 @@ export const useCropCanvasInfo = (optoins: {
       },
     };
   });
+  const cropAreaStyle = computed(() => {
+    return {
+      top: `${resolvedSelectedArea.value.start.y}px`,
+      left: `${resolvedSelectedArea.value.start.x}px`,
+      width: `${resolvedSelectedArea.value.width}px`,
+      height: `${resolvedSelectedArea.value.height}px`,
+    };
+  });
 
   useEventListener("mousedown", (_) => {
     // outside
@@ -70,6 +78,7 @@ export const useCropCanvasInfo = (optoins: {
 
   return {
     cropArea: resolvedSelectedArea,
+    cropAreaStyle,
     isCropping: isDragging,
     area2CanvasArea,
     hideBoxPositions,
