@@ -37,6 +37,13 @@ export const useSelectedArea = (
   const selectedArea = reactive<IselectedArea>(
     Object.assign({}, initialSelectedArea)
   );
+  const resetSelectedArea = () => {
+    const initial = Object.assign({}, initialSelectedArea);
+    selectedArea.start = initial.start;
+    selectedArea.width = initial.width;
+    selectedArea.height = initial.height;
+  };
+
   const resolvedSelectedArea = computed(
     (): IselectedArea => {
       const width =
@@ -112,6 +119,7 @@ export const useSelectedArea = (
 
   return {
     resolvedSelectedArea,
+    resetSelectedArea,
     area2CanvasArea,
     isDragging,
     isOutside,

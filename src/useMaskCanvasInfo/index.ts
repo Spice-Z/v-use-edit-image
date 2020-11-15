@@ -4,10 +4,13 @@ import { useSelectedArea } from "../shared/useSelectedArea";
 
 export const useMaskCanvasInfo = (optoins: {
   canvasRef: Ref<HTMLCanvasElement | null>;
+  // canvasRef should first argument
   cropAspectHeightRatio?: number;
+  // options should have color.
 }) => {
   const {
     resolvedSelectedArea,
+    resetSelectedArea,
     isDragging,
     isOutside,
     area2CanvasArea,
@@ -37,6 +40,7 @@ export const useMaskCanvasInfo = (optoins: {
   const maskAreas = ref<ISelectedArea[]>([]);
   const resetMaskAreas = () => {
     maskAreas.value = [];
+    resetSelectedArea();
   };
 
   useEventListener("mouseup", (_) => {

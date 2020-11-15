@@ -8,6 +8,7 @@ export const useCropCanvasInfo = (optoins: {
 }) => {
   const {
     resolvedSelectedArea,
+    resetSelectedArea,
     area2CanvasArea,
     isDragging,
     isOutside,
@@ -78,6 +79,7 @@ export const useCropCanvasInfo = (optoins: {
 
   return {
     cropArea: resolvedSelectedArea,
+    resetCropArea: resetSelectedArea,
     cropAreaStyle,
     isCropping: isDragging,
     area2CanvasArea,
