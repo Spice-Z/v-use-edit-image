@@ -6,14 +6,16 @@ export const useMaskCanvasInfo = (optoins: {
   canvasRef: Ref<HTMLCanvasElement | null>;
   cropAspectHeightRatio?: number;
 }) => {
-  const { selectedArea, isDragging, isOutside } = useSelectedArea(
-    optoins.canvasRef,
-    {
-      ...(optoins.cropAspectHeightRatio
-        ? { selectAspectHeightRatio: optoins.cropAspectHeightRatio }
-        : {}),
-    }
-  );
+  const {
+    selectedArea,
+    isDragging,
+    isOutside,
+    area2CanvasArea,
+  } = useSelectedArea(optoins.canvasRef, {
+    ...(optoins.cropAspectHeightRatio
+      ? { selectAspectHeightRatio: optoins.cropAspectHeightRatio }
+      : {}),
+  });
 
   const cropAreaStyle = computed(() => {
     return {
@@ -43,6 +45,7 @@ export const useMaskCanvasInfo = (optoins: {
   return {
     cropArea: selectedArea,
     isCropping: isDragging,
+    area2CanvasArea,
     maskAreas,
     cropAreaStyle,
   };

@@ -8,6 +8,7 @@ export const useCropCanvasInfo = (optoins: {
 }) => {
   const {
     selectedArea,
+    area2CanvasArea,
     isDragging,
     isOutside,
     // targetPositionX,
@@ -66,6 +67,7 @@ export const useCropCanvasInfo = (optoins: {
   return {
     cropArea: selectedArea,
     isCropping: isDragging,
+    area2CanvasArea,
     hideBoxPositions,
     cropBoxColor,
   };
