@@ -1,3 +1,3 @@
-export * from "./useCanvas";
-export * from "./useCropCanvasInfo";
-export * from "./useMaskCanvasInfo";
+export * from "./useEditImage";
+export * from "./useCropInfo";
+export * from "./useMaskInfo";

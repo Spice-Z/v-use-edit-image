@@ -2,19 +2,21 @@ import { computed, reactive, Ref } from "vue-demi";
 import { useEventListener } from "@vueuse/core";
 import { useSelectedArea } from "../shared/useSelectedArea";
 
-export const useCropCanvasInfo = (optoins: {
-  canvasRef: Ref<HTMLCanvasElement | null>;
-  cropAspectHeightRatio?: number;
-}) => {
+export const useCropInfo = (
+  canvasRef: Ref<HTMLCanvasElement | null>,
+  optoins: {
+    aspectHeightRatio?: number;
+  }
+) => {
   const {
     resolvedSelectedArea,
     isDragging,
     isOutside,
     targetHeight,
     targetWidth,
-  } = useSelectedArea(optoins.canvasRef, {
-    ...(optoins.cropAspectHeightRatio
-      ? { selectAspectHeightRatio: optoins.cropAspectHeightRatio }
+  } = useSelectedArea(canvasRef, {
+    ...(optoins.aspectHeightRatio
+      ? { selectAspectHeightRatio: optoins.aspectHeightRatio }
       : {}),
   });
 

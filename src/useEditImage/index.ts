@@ -98,7 +98,7 @@ type ClipRectProp = {
   imageRef: Ref<HTMLImageElement>;
 };
 
-export const useCanvas = () => {
+export const useEditImage = () => {
   const canvasRef = ref<null | HTMLCanvasElement>(null);
 
   const setCanvasRect = (x: number, y: number) => {

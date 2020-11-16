@@ -3,20 +3,22 @@ import { useEventListener } from "@vueuse/core";
 import { useSelectedArea } from "../shared/useSelectedArea";
 import { ISelectedArea } from "../shared/types";
 
-export const useMaskCanvasInfo = (optoins: {
-  canvasRef: Ref<HTMLCanvasElement | null>;
-  // canvasRef should first argument
-  cropAspectHeightRatio?: number;
-  // options should have color.
-}) => {
+export const useMaskInfo = (
+  canvasRef: Ref<HTMLCanvasElement | null>,
+  optoins: {
+    // canvasRef should first argument
+    aspectHeightRatio?: number;
+    // options should have color.
+  }
+) => {
   const {
     resolvedSelectedArea,
     resetSelectedArea,
     isDragging,
     isOutside,
-  } = useSelectedArea(optoins.canvasRef, {
-    ...(optoins.cropAspectHeightRatio
-      ? { selectAspectHeightRatio: optoins.cropAspectHeightRatio }
+  } = useSelectedArea(canvasRef, {
+    ...(optoins.aspectHeightRatio
+      ? { selectAspectHeightRatio: optoins.aspectHeightRatio }
       : {}),
   });
 
