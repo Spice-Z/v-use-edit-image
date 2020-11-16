@@ -1,7 +1,7 @@
 # v-use-edit-image
 
 
-<p align="center">
+<p>
 <a href="https://www.npmjs.com/package/v-use-edit-image" target="__blank"><img alt="NPM Version" src="https://img.shields.io/npm/v/v-use-edit-image"/></a>
 </p>
 
