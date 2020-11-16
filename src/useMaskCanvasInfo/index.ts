@@ -1,6 +1,7 @@
 import { computed, ref, Ref } from "vue-demi";
 import { useEventListener } from "@vueuse/core";
 import { useSelectedArea } from "../shared/useSelectedArea";
+import { ISelectedArea } from "../shared/types";
 
 export const useMaskCanvasInfo = (optoins: {
   canvasRef: Ref<HTMLCanvasElement | null>;
@@ -13,7 +14,6 @@ export const useMaskCanvasInfo = (optoins: {
     resetSelectedArea,
     isDragging,
     isOutside,
-    area2CanvasArea,
   } = useSelectedArea(optoins.canvasRef, {
     ...(optoins.cropAspectHeightRatio
       ? { selectAspectHeightRatio: optoins.cropAspectHeightRatio }
@@ -29,14 +29,6 @@ export const useMaskCanvasInfo = (optoins: {
     };
   });
 
-  type ISelectedArea = {
-    start: {
-      x: number;
-      y: number;
-    };
-    width: number;
-    height: number;
-  };
   const maskAreas = ref<ISelectedArea[]>([]);
   const resetMaskAreas = () => {
     maskAreas.value = [];
@@ -54,7 +46,6 @@ export const useMaskCanvasInfo = (optoins: {
     maskAreas,
     resetMaskAreas,
     isCropping: isDragging,
-    area2CanvasArea,
     maskAreaStyle,
   };
 };

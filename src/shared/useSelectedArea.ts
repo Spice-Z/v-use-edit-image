@@ -70,23 +70,6 @@ export const useSelectedArea = (
       };
     }
   );
-  const area2CanvasArea = (area: IselectedArea) => {
-    if (target.value === null) {
-      return selectedArea;
-    }
-    const rect = target.value.getBoundingClientRect();
-    const wRatio = target.value.width / rect.width;
-    const hRatio = target.value.height / rect.height;
-
-    return {
-      start: {
-        x: area.start.x * wRatio,
-        y: area.start.y * hRatio,
-      },
-      width: area.width * wRatio,
-      height: area.height * hRatio,
-    };
-  };
 
   useEventListener("mousedown", (_) => {
     isDragging.value = true;
@@ -120,7 +103,6 @@ export const useSelectedArea = (
   return {
     resolvedSelectedArea,
     resetSelectedArea,
-    area2CanvasArea,
     isDragging,
     isOutside,
     targetPositionX: elementPositionX,

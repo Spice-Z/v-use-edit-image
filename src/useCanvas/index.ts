@@ -1,4 +1,5 @@
 import { ref, Ref } from "vue-demi";
+import { ISelectedArea } from "../shared/types";
 
 type writeTextProps = {
   fSize: number;
@@ -307,6 +308,25 @@ export const useCanvas = () => {
       prop.height
     );
   };
+  const area2CanvasArea = (area: ISelectedArea) => {
+    if (canvasRef.value === null) {
+      return area;
+    }
+    const canvas = canvasRef.value;
+
+    const rect = canvas.getBoundingClientRect();
+    const wRatio = canvas.width / rect.width;
+    const hRatio = canvas.height / rect.height;
+
+    return {
+      start: {
+        x: area.start.x * wRatio,
+        y: area.start.y * hRatio,
+      },
+      width: area.width * wRatio,
+      height: area.height * hRatio,
+    };
+  };
 
   return {
     canvasRef,
@@ -317,5 +337,6 @@ export const useCanvas = () => {
     drawShape,
     writeText,
     makeImageGraySepia,
+    area2CanvasArea,
   };
 };
