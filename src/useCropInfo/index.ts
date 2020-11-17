@@ -10,6 +10,7 @@ export const useCropInfo = (
 ) => {
   const {
     resolvedSelectedArea,
+    resetSelectedArea,
     isDragging,
     isOutside,
     targetHeight,
@@ -79,6 +80,7 @@ export const useCropInfo = (
 
   return {
     cropArea: resolvedSelectedArea,
+    resetCropArea: resetSelectedArea,
     cropAreaStyle,
     isCropping: isDragging,
     hideBoxPositions,
