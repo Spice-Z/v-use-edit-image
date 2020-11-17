@@ -17,8 +17,65 @@ npm i v-use-edit-image
 
 ## Usage
 
-```js
-import { useCanvas } v-use-edit-image
+Currently, `v-use-edit-image` has 3 methods.
+
+```ts
+import { useEditImage, useCropInfo } from 'v-use-edit-image'
+
+export default defineComponent({
+  setup(props, context) {
+    const originImageRef = ref(null)
+    const originImage = ref(null)
+
+    const { canvasRef, drawOriginImage, clipRect, area2CanvasArea } = useEditImage()
+    const { cropArea, cropAreaStyle, hideBoxPositions } = useCropInfo(canvasRef, {})
+
+    const createImage = (file: File): Promise<string | ArrayBuffer | null | undefined> => {
+      return new Promise((resolve) => {
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          resolve(e.target?.result)
+        }
+        reader.readAsDataURL(file)
+      })
+    }
+
+    const onFileChange = async (e) => {
+      const target = e.target
+      const files = target.files
+      if (files.lenfth <= 0) {
+        return
+      }
+      originImage.value = await createImage(files[0])
+    }
+
+    const crop = () => {
+      if (canvasRef.value === null) {
+        return
+      }
+      const targetArea = area2CanvasArea(cropArea.value)
+      const prop = {
+        x: targetArea.start.x,
+        y: targetArea.start.y,
+        width: targetArea.width,
+        height: targetArea.height,
+        imageRef: originImageRef,
+      }
+      clipRect(prop)
+      originImage.value = canvasRef.value !== null ? canvasRef.value.toDataURL('image/jpeg') : ''
+    }
+
+    return {
+      canvasRef,
+      onFileChange,
+      originImage,
+      originImageRef,
+      hideBoxPositions,
+      cropAreaStyle,
+      crop,
+    }
+  },
+})
 
 ```
 
