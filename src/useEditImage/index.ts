@@ -120,11 +120,11 @@ export const useEditImage = () => {
     const canvas = canvasRef.value;
     const imageWidth = imageRef.value.naturalWidth;
     const imageHeight = imageRef.value.naturalHeight;
-    // TODO:refactor
-    if (
+    const shouldResize =
       options?.maxImageSide &&
-      (imageWidth > options.maxImageSide || imageHeight > options.maxImageSide)
-    ) {
+      (imageWidth > options.maxImageSide || imageHeight > options.maxImageSide);
+    // TODO:refactor
+    if (options?.maxImageSide && shouldResize) {
       if (imageWidth > imageHeight) {
         const resolvedWidth = options.maxImageSide;
         const resolvedHeight =
@@ -142,7 +142,18 @@ export const useEditImage = () => {
     if (ctx === null) {
       return;
     }
-    await ctx.drawImage(imageRef.value, 0, 0);
+
+    await ctx.drawImage(
+      imageRef.value,
+      0,
+      0,
+      imageWidth,
+      imageHeight,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
   };
 
   type drawDecorationImageReturn = {
