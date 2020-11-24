@@ -108,12 +108,36 @@ export const useEditImage = () => {
     setRect(canvasRef.value, x, y);
   };
 
-  const drawOriginImage = async (imageRef: Ref<HTMLImageElement | null>) => {
+  const drawOriginImage = async (
+    imageRef: Ref<HTMLImageElement | null>,
+    options?: {
+      maxImageSide?: number;
+    }
+  ) => {
     if (canvasRef.value === null || imageRef.value === null) {
       return;
     }
     const canvas = canvasRef.value;
-    setCanvasRect(imageRef.value.naturalWidth, imageRef.value.naturalHeight);
+    const imageWidth = imageRef.value.naturalWidth;
+    const imageHeight = imageRef.value.naturalHeight;
+    // TODO:refactor
+    if (
+      options?.maxImageSide &&
+      (imageWidth > options.maxImageSide || imageHeight > options.maxImageSide)
+    ) {
+      if (imageWidth > imageHeight) {
+        const resolvedWidth = options.maxImageSide;
+        const resolvedHeight =
+          imageHeight * (options.maxImageSide / imageWidth);
+        setCanvasRect(resolvedWidth, resolvedHeight);
+      } else {
+        const resolvedHeight = options.maxImageSide;
+        const resolvedWidth = imageWidth * (options.maxImageSide / imageHeight);
+        setCanvasRect(resolvedWidth, resolvedHeight);
+      }
+    } else {
+      setCanvasRect(imageWidth, imageHeight);
+    }
     const ctx = canvas.getContext("2d");
     if (ctx === null) {
       return;
