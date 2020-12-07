@@ -7,6 +7,11 @@
 
 v-use-edit-image is a Vue Composition API library for editing image with canvas API.
 
+You can mask image like this!
+
+![mask](https://user-images.githubusercontent.com/15419227/101368325-58e77a80-38ea-11eb-9134-73ab861cc87e.gif)
+
+
 ## 🚀 Installation
 
 Use the package manager [npm](https://www.npmjs.com/package/v-use-edit-image) to install v-use-edit-image.
