@@ -27,7 +27,7 @@
     </div>
     <button @click="mask">Mask!</button>
     <!-- <img src="" alt=""> -->
-    <img :src="maskedImage" alt="masked image" />
+    <img :src="maskedImage" class="masked-image" alt="masked image" />
   </div>
   <img
     style="visibility: hidden"
@@ -129,7 +129,7 @@ export default defineComponent({
   display: block;
   width: fit-content;
   height: auto;
-  max-width: 60%;
+  max-width: 80%;
   margin: 24px auto;
   background-color: #f1f1f1;
   position: relative;
@@ -145,5 +145,11 @@ export default defineComponent({
 
 .absolute {
   position: absolute;
+}
+
+.masked-image {
+  height: auto;
+  max-width: 80%;
+  margin: 24px auto;
 }
 </style>
