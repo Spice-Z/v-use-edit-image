@@ -7,15 +7,17 @@
 
 v-use-edit-image is a Vue Composition API library for editing image with canvas API.
 
-## Installation
+## 🚀 Installation
 
-Use the package manager [npm]() to install v-use-edit-image.
+Use the package manager [npm](https://www.npmjs.com/package/v-use-edit-image) to install v-use-edit-image.
 
 ```bash
 npm i v-use-edit-image
 ```
 
-## Usage
+**You also have to install [Composition API](https://github.com/vuejs/composition-api) library if you use Vue 2.x**
+
+## ✏️ Usage
 
 Currently, `v-use-edit-image` has 3 methods.
 
@@ -79,7 +81,7 @@ export default defineComponent({
 
 ```
 
-## Contributing
+## 📚 Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
 Please make sure to update tests as appropriate.
