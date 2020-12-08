@@ -1,8 +1,23 @@
 # example
 This example app is on [vite](https://github.com/vitejs/vite)
 
-## Run
+## 🏃‍♀️ Run
 ```bash
 $ npm install
 $ npm run dev
 ```
+
+## 🎭 For Mask Image
+Example component is `/src/components/MaskImage.vue`
+Please check the component or read below step to mask image!
+
+### Step to mask
+1. Set `<camvas />` and draw orign image with `ref`.
+2. Make container DOM arround `<canvas />`, and make some DOMs to render seleted ares.
+3. Convert canvas data to image URL with canvas API(`toDataURL`)!
+4. You can emit url or render image DOM.
+#### Future Feature of Mask
+- Delete selected area
+
+## ⚔️ For Crop Image
+WIP🔥

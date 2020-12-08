@@ -8,11 +8,14 @@
       @change="onFileChange"
     />
     <div class="canvas-container">
+      <!-- Need Canvas DOM -->
       <canvas ref="canvasRef" class="canvas" />
+      <!-- You can sync current selected area with maskAreaStyle -->
       <div
         style="position: absolute; background: beige"
         :style="maskAreaStyle"
       />
+      <!-- You can sync defined selected area with maskAreas -->
       <div
         v-for="maskArea in maskAreas"
         :key="`${maskArea.start.x}-${maskArea.start.y}-${maskArea.width}-${maskArea.height}`"
@@ -26,7 +29,6 @@
       />
     </div>
     <button @click="mask">Mask!</button>
-    <!-- <img src="" alt=""> -->
     <img :src="maskedImage" class="masked-image" alt="masked image" />
   </div>
   <img
