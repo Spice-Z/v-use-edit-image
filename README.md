@@ -11,6 +11,8 @@ You can mask image like this!
 
 ![mask](https://user-images.githubusercontent.com/15419227/101368325-58e77a80-38ea-11eb-9134-73ab861cc87e.gif)
 
+And also, you can crop, insert string, and draw images above image.
+(Currently, this repo only has mask example... Sorry!)
 
 ## 🚀 Installation
 
