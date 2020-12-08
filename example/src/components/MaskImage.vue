@@ -47,14 +47,10 @@ export default defineComponent({
     const {
       canvasRef,
       drawOriginImage,
-      clipRect,
       drawShape,
       area2CanvasArea,
     } = useEditImage();
-    const { maskAreaStyle, maskAreas, resetMaskAreas } = useMaskInfo(
-      canvasRef,
-      {}
-    );
+    const { maskAreaStyle, maskAreas } = useMaskInfo(canvasRef, {});
 
     const originImageRef = ref<null | HTMLImageElement>(null);
     const originImage = ref<string | ArrayBuffer | null | undefined>(null);
