@@ -16,9 +16,9 @@
   "author": "Spice-Z<https://github.com/Spice-Z/>",
   "license": "MIT",
   "dependencies": {
-    "@vue/composition-api": "^1.0.0-beta.19",
-    "@vueuse/core": "^4.0.0-beta.30",
-    "vue-demi": "^0.4.3"
+    "@vue/composition-api": "^1.0.0-beta.22",
+    "@vueuse/core": "^4.0.0",
+    "vue-demi": "^0.4.5"
   },
   "devDependencies": {
     "rollup": "^2.32.1",
