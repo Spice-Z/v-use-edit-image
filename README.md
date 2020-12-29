@@ -1,5 +1,8 @@
 # v-use-edit-image
 
+<p align="center">
+<img src="https://user-images.githubusercontent.com/15419227/103265552-34feec80-49f1-11eb-8676-1cb6b73fb5cb.png" width="300"/><br>
+</p>
 
 <p>
 <a href="https://www.npmjs.com/package/v-use-edit-image" target="__blank"><img alt="NPM Version" src="https://img.shields.io/npm/v/v-use-edit-image"/></a>
