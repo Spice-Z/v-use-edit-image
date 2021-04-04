@@ -1,0 +1,45 @@
+name: auto release on github & npm
+on:
+  push:
+    # mainブランチにコミットがpushされたときに限定
+    branches:
+      - main
+    # 上記条件に加えてgenディレクトリ配下が変更されたときのみという条件を追加
+    paths:
+      - src/**
+      - package.json
+jobs:
+  auto-release:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      RELEASE_IT_VERSION: 14.5.1
+    steps:
+      - name: Check out codes
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Set releaser settings
+        run: |
+          git config --global user.name release-machine
+          git config --global user.email email@example.com
+      - name: Set .npmrc
+        run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+      - name: Major release
+        id: major
+        if: contains(toJSON(github.event.commits.*.message), 'update major version')
+        run:  npx release-it@${RELEASE_IT_VERSION} -- major --ci
+      - name: Minor release
+        id: minor
+        # メジャーバージョンアップをしていないときマイナーバージョンアップを行なうか
+        if: steps.major.conclusion == 'skipped' && contains(toJSON(github.event.commits.*.message), 'update minor version')
+        run:  npx release-it@${RELEASE_IT_VERSION} -- minor --ci
+      - name: Patch release
+        # コミットメッセージに特に指定がない場合はマイナーバージョンを更新する
+        if: "!(steps.major.conclusion == 'success' || steps.minor.conclusion == 'success')"
+        run:  npx release-it@${RELEASE_IT_VERSION} -- patch --ci
