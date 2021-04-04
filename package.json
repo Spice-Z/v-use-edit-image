@@ -34,5 +34,21 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/Spice-Z/v-use-edit-image"
+  },
+  "release-it": {
+    "requireUpstream": false,
+    "requireCleanWorkingDir": false,
+    "github": {
+      "release": true
+    },
+    "git": {
+      "commit": false,
+      "push": false,
+      "requireUpstream": false,
+      "requireCleanWorkingDir": false
+    },
+    "npm": {
+      "publish": true
+    }
   }
 }
