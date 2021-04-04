@@ -4,7 +4,6 @@ on:
     # mainブランチにコミットがpushされたときに限定
     branches:
       - main
-    # 上記条件に加えてgenディレクトリ配下が変更されたときのみという条件を追加
     paths:
       - src/**
       - package.json
@@ -30,6 +29,8 @@ jobs:
           git config --global user.email email@example.com
       - name: Set .npmrc
         run: echo '//registry.npmjs.org/:_authToken=${NPM_TOKEN}' > .npmrc
+      - name: build
+        run: npm ci && npm run build
       - name: Major release
         id: major
         if: contains(toJSON(github.event.commits.*.message), 'update major version')
