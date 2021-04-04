@@ -1,6 +1,6 @@
 {
   "name": "v-use-edit-image",
-  "version": "0.6.4",
+  "version": "0.7.0",
   "description": "This is vue composition-api library to edit image on canvas.",
   "main": "dist/index.umd.js",
   "types": "dist/index.d.ts",
