@@ -7,6 +7,7 @@ on:
     # 上記条件に加えてgenディレクトリ配下が変更されたときのみという条件を追加
     paths:
       - src/**
+      - package.json
 jobs:
   auto-release:
     runs-on: ubuntu-latest
