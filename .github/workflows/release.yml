@@ -1,11 +1,10 @@
 name: auto release on github & npm
 on:
   push:
-    # mainブランチにコミットがpushされたときに限定
+    # mainブランチのpackage.jsonが変更されたときに限定
     branches:
       - main
     paths:
-      - src/**
       - package.json
 jobs:
   auto-release:
@@ -22,7 +21,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v1
         with:
-          node-version: '12'
+          node-version: "12"
       - name: Set releaser settings
         run: |
           git config --global user.name release-machine
@@ -34,13 +33,13 @@ jobs:
       - name: Major release
         id: major
         if: contains(toJSON(github.event.commits.*.message), 'update major version')
-        run:  npx release-it@${RELEASE_IT_VERSION} -- major --ci
+        run: npx release-it@${RELEASE_IT_VERSION} -- major --ci
       - name: Minor release
         id: minor
         # メジャーバージョンアップをしていないときマイナーバージョンアップを行なうか
         if: steps.major.conclusion == 'skipped' && contains(toJSON(github.event.commits.*.message), 'update minor version')
-        run:  npx release-it@${RELEASE_IT_VERSION} -- minor --ci
+        run: npx release-it@${RELEASE_IT_VERSION} -- minor --ci
       - name: Patch release
         # コミットメッセージに特に指定がない場合はマイナーバージョンを更新する
         if: "!(steps.major.conclusion == 'success' || steps.minor.conclusion == 'success')"
-        run:  npx release-it@${RELEASE_IT_VERSION} -- patch --ci
+        run: npx release-it@${RELEASE_IT_VERSION} -- patch --ci
