@@ -41,7 +41,7 @@
 
 <script lang="ts">
 import { useEditImage, useMaskInfo } from "v-use-edit-image";
-import { defineComponent, ref, watchEffect } from "vue";
+import { defineComponent, ref } from "vue";
 export default defineComponent({
   setup() {
     const {
