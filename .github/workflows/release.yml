@@ -1,9 +1,9 @@
 name: auto release on github & npm
 on:
   push:
-    # mainブランチのpackage.jsonが変更されたときに限定
+    # releaseブランチのpackage.jsonが変更されたときに限定
     branches:
-      - main
+      - release
     paths:
       - package.json
 jobs:
