@@ -1,11 +1,13 @@
-import { ref, reactive, Ref, computed } from "vue";
-import { useMouseInElement, useEventListener } from "@vueuse/core";
+import {
+  ref, reactive, Ref, computed,
+} from 'vue';
+import { useMouseInElement, useEventListener } from '@vueuse/core';
 
 export const useSelectedArea = (
   target: Ref<HTMLCanvasElement | null>,
   optoins?: {
     selectAspectHeightRatio?: number;
-  }
+  },
 ) => {
   const {
     elementX,
@@ -35,28 +37,24 @@ export const useSelectedArea = (
     height: 0,
   };
   const selectedArea = reactive<IselectedArea>(
-    Object.assign({}, initialSelectedArea)
+    { ...initialSelectedArea },
   );
   const resetSelectedArea = () => {
-    const initial = Object.assign({}, initialSelectedArea);
+    const initial = { ...initialSelectedArea };
     selectedArea.start = initial.start;
     selectedArea.width = initial.width;
     selectedArea.height = initial.height;
   };
 
   const resolvedSelectedArea = computed((): IselectedArea => {
-    const width =
-      selectedArea.width < 0 ? selectedArea.width * -1 : selectedArea.width;
-    const height =
-      selectedArea.height < 0 ? selectedArea.height * -1 : selectedArea.height;
-    const x =
-      selectedArea.width < 0
-        ? selectedArea.start.x - width
-        : selectedArea.start.x;
-    const y =
-      selectedArea.height < 0
-        ? selectedArea.start.y - height
-        : selectedArea.start.y;
+    const width = selectedArea.width < 0 ? selectedArea.width * -1 : selectedArea.width;
+    const height = selectedArea.height < 0 ? selectedArea.height * -1 : selectedArea.height;
+    const x = selectedArea.width < 0
+      ? selectedArea.start.x - width
+      : selectedArea.start.x;
+    const y = selectedArea.height < 0
+      ? selectedArea.start.y - height
+      : selectedArea.start.y;
     return {
       start: {
         x,
@@ -67,7 +65,7 @@ export const useSelectedArea = (
     };
   });
 
-  useEventListener("mousedown", (_) => {
+  useEventListener('mousedown', (_) => {
     isDragging.value = true;
 
     if (isOutside.value) {
@@ -82,17 +80,16 @@ export const useSelectedArea = (
       y: elementY.value,
     };
   });
-  useEventListener("mousemove", (_) => {
+  useEventListener('mousemove', (_) => {
     if (!isDragging.value) {
       return;
     }
     selectedArea.width = elementX.value - selectedArea.start.x;
-    selectedArea.height =
-      optoins?.selectAspectHeightRatio === undefined
-        ? elementY.value - selectedArea.start.y
-        : selectedArea.width * optoins.selectAspectHeightRatio;
+    selectedArea.height = optoins?.selectAspectHeightRatio === undefined
+      ? elementY.value - selectedArea.start.y
+      : selectedArea.width * optoins.selectAspectHeightRatio;
   });
-  useEventListener("mouseup", (_) => {
+  useEventListener('mouseup', (_) => {
     isDragging.value = false;
   });
 

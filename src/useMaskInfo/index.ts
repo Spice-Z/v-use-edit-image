@@ -1,7 +1,7 @@
-import { computed, ref, Ref } from "vue";
-import { useEventListener } from "@vueuse/core";
-import { useSelectedArea } from "../shared/useSelectedArea";
-import { ISelectedArea } from "../shared/types";
+import { computed, ref, Ref } from 'vue';
+import { useEventListener } from '@vueuse/core';
+import { useSelectedArea } from '../shared/useSelectedArea';
+import { ISelectedArea } from '../shared/types';
 
 export const useMaskInfo = (
   canvasRef: Ref<HTMLCanvasElement | null>,
@@ -9,23 +9,22 @@ export const useMaskInfo = (
     // canvasRef should first argument
     aspectHeightRatio?: number;
     // options should have color.
-  }
+  },
 ) => {
-  const { resolvedSelectedArea, resetSelectedArea, isDragging, isOutside } =
-    useSelectedArea(canvasRef, {
-      ...(optoins.aspectHeightRatio
-        ? { selectAspectHeightRatio: optoins.aspectHeightRatio }
-        : {}),
-    });
-
-  const maskAreaStyle = computed(() => {
-    return {
-      top: `${resolvedSelectedArea.value.start.y}px`,
-      left: `${resolvedSelectedArea.value.start.x}px`,
-      width: `${resolvedSelectedArea.value.width}px`,
-      height: `${resolvedSelectedArea.value.height}px`,
-    };
+  const {
+    resolvedSelectedArea, resetSelectedArea, isDragging, isOutside,
+  } = useSelectedArea(canvasRef, {
+    ...(optoins.aspectHeightRatio
+      ? { selectAspectHeightRatio: optoins.aspectHeightRatio }
+      : {}),
   });
+
+  const maskAreaStyle = computed(() => ({
+    top: `${resolvedSelectedArea.value.start.y}px`,
+    left: `${resolvedSelectedArea.value.start.x}px`,
+    width: `${resolvedSelectedArea.value.width}px`,
+    height: `${resolvedSelectedArea.value.height}px`,
+  }));
 
   const maskAreas = ref<ISelectedArea[]>([]);
   const resetMaskAreas = () => {
@@ -33,9 +32,9 @@ export const useMaskInfo = (
     resetSelectedArea();
   };
 
-  useEventListener("mouseup", (_) => {
+  useEventListener('mouseup', (_) => {
     if (!isOutside.value) {
-      maskAreas.value.push(Object.assign({}, resolvedSelectedArea.value));
+      maskAreas.value.push({ ...resolvedSelectedArea.value });
     }
   });
 

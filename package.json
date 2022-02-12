@@ -11,7 +11,8 @@
   "scripts": {
     "build": "rollup -c",
     "release": "rollup -c & npm publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint . --ext .js,.ts --fix"
   },
   "author": "Spice-Z<https://github.com/Spice-Z/>",
   "license": "MIT",
@@ -20,12 +21,19 @@
     "vue": "^3.2.28"
   },
   "devDependencies": {
+    "@rollup/plugin-eslint": "^8.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
+    "@typescript-eslint/parser": "^5.11.0",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.4",
     "rollup": "^2.32.1",
     "rollup-plugin-dts": "^4.1.0",
     "rollup-plugin-terser": "^7.0.2",
     "rollup-plugin-typescript2": "^0.31.2",
-    "typescript": "^4.0.5",
     "tslib": "^2.1.0",
+    "typescript": "^4.0.5",
     "vue": "^3.2.28"
   },
   "repository": {

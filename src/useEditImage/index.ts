@@ -1,10 +1,10 @@
-import { ref, Ref } from "vue";
-import { ISelectedArea } from "../shared/types";
+import { ref, Ref } from 'vue';
+import { ISelectedArea } from '../shared/types';
 
 type writeTextProps = {
   fSize: number;
   x: number;
-  y: number | "bottom";
+  y: number | 'bottom';
   text: string;
   strokeStyle?: string;
   lineWidth?: number;
@@ -18,28 +18,28 @@ type writeTextProps = {
 const write = (
   context: CanvasRenderingContext2D,
   props: Required<writeTextProps>,
-  canvasHeight: number
+  canvasHeight: number,
 ) => {
   context.font = `bold ${props.fSize}px "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif`;
-  context.textBaseline = "middle";
-  context.textAlign = props.isTextAlignCenter ? "center" : "start";
+  context.textBaseline = 'middle';
+  context.textAlign = props.isTextAlignCenter ? 'center' : 'start';
   context.strokeStyle = props.strokeStyle;
   context.lineWidth = props.lineWidth;
-  const posY = props.y === "bottom" ? canvasHeight - props.fSize : props.y;
+  const posY = props.y === 'bottom' ? canvasHeight - props.fSize : props.y;
   if (props.shouldShowShadow) {
-    context.shadowColor = "#000";
+    context.shadowColor = '#000';
     context.shadowBlur = 6;
     context.shadowOffsetX = 0;
     context.shadowOffsetY = 0;
   } else {
-    context.shadowColor = "none";
+    context.shadowColor = 'none';
     context.shadowBlur = 0;
     context.shadowOffsetX = 0;
     context.shadowOffsetY = 0;
   }
 
   const lineHeight = props.fSize * 1.1618;
-  props.text.split("\n").forEach((t, i, a) => {
+  props.text.split('\n').forEach((t, i, a) => {
     const y = posY - lineHeight * (a.length - (i + 1));
     if (props.backgroundColor) {
       context.fillStyle = props.backgroundColor;
@@ -63,7 +63,7 @@ type drawShapeType = {
 };
 const drawShapeToCanvas = (
   context: CanvasRenderingContext2D,
-  props: Required<drawShapeType>
+  props: Required<drawShapeType>,
 ) => {
   context.lineWidth = props.lineWidth;
   context.beginPath();
@@ -86,7 +86,9 @@ const drawShapeToCanvas = (
 };
 
 const setRect = (canvas: HTMLCanvasElement, x: number, y: number) => {
+  // eslint-disable-next-line no-param-reassign
   canvas.width = x;
+  // eslint-disable-next-line no-param-reassign
   canvas.height = y;
 };
 
@@ -112,7 +114,7 @@ export const useEditImage = () => {
     imageRef: Ref<HTMLImageElement | null>,
     options?: {
       maxImageSide?: number;
-    }
+    },
   ) => {
     if (canvasRef.value === null || imageRef.value === null) {
       return;
@@ -120,15 +122,13 @@ export const useEditImage = () => {
     const canvas = canvasRef.value;
     const imageWidth = imageRef.value.naturalWidth;
     const imageHeight = imageRef.value.naturalHeight;
-    const shouldResize =
-      options?.maxImageSide &&
-      (imageWidth > options.maxImageSide || imageHeight > options.maxImageSide);
+    const shouldResize = options?.maxImageSide
+      && (imageWidth > options.maxImageSide || imageHeight > options.maxImageSide);
     // TODO:refactor
     if (options?.maxImageSide && shouldResize) {
       if (imageWidth > imageHeight) {
         const resolvedWidth = options.maxImageSide;
-        const resolvedHeight =
-          imageHeight * (options.maxImageSide / imageWidth);
+        const resolvedHeight = imageHeight * (options.maxImageSide / imageWidth);
         setCanvasRect(resolvedWidth, resolvedHeight);
       } else {
         const resolvedHeight = options.maxImageSide;
@@ -138,7 +138,7 @@ export const useEditImage = () => {
     } else {
       setCanvasRect(imageWidth, imageHeight);
     }
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (ctx === null) {
       return;
     }
@@ -152,7 +152,7 @@ export const useEditImage = () => {
       0,
       0,
       canvas.width,
-      canvas.height
+      canvas.height,
     );
   };
 
@@ -165,8 +165,8 @@ export const useEditImage = () => {
   const drawDecorationImage = async (
     decorationImageRef: Ref<HTMLImageElement | null>,
     sizePer: number = 100,
-    dxPer: "auto" | "right" | number = "auto",
-    dyPer: "auto" | "right" | number = "auto"
+    dxPer: 'auto' | 'right' | number = 'auto',
+    dyPer: 'auto' | 'right' | number = 'auto',
   ): Promise<drawDecorationImageReturn> => {
     if (canvasRef.value === null || decorationImageRef.value === null) {
       return {
@@ -176,7 +176,7 @@ export const useEditImage = () => {
         dy: 0,
       };
     }
-    const ctx = canvasRef.value.getContext("2d");
+    const ctx = canvasRef.value.getContext('2d');
     if (ctx === null) {
       return {
         dWidth: 0,
@@ -190,21 +190,19 @@ export const useEditImage = () => {
     const sWidth = decorationImageRef.value.naturalWidth;
     const sHeight = decorationImageRef.value.naturalHeight;
     const dWidth = (canvasRef.value.width / 100) * sizePer;
-    const dHeight =
-      ((decorationImageRef.value.naturalHeight *
-        (canvasRef.value.width / decorationImageRef.value.naturalWidth)) /
-        100) *
-      sizePer;
-    const dx =
-      dxPer === "auto"
-        ? (canvasRef.value.width / 100) * ((100 - sizePer) / 2)
-        : dxPer === "right"
+    const dHeight = ((decorationImageRef.value.naturalHeight
+        * (canvasRef.value.width / decorationImageRef.value.naturalWidth))
+        / 100)
+      * sizePer;
+    const dx = dxPer === 'auto'
+      ? (canvasRef.value.width / 100) * ((100 - sizePer) / 2)
+      : dxPer === 'right'
         ? canvasRef.value.width - dWidth
         : (canvasRef.value.width / 100) * dxPer;
-    const dy =
-      dyPer === "auto"
-        ? canvasRef.value.height - dHeight - canvasRef.value.height * 0.05
-        : dyPer === "right"
+
+    const dy = dyPer === 'auto'
+      ? canvasRef.value.height - dHeight - canvasRef.value.height * 0.05
+      : dyPer === 'right'
         ? canvasRef.value.height - dHeight
         : (canvasRef.value.width / 100) * dyPer;
     await ctx.drawImage(
@@ -216,7 +214,7 @@ export const useEditImage = () => {
       dx,
       dy,
       dWidth,
-      dHeight
+      dHeight,
     );
 
     return {
@@ -231,20 +229,20 @@ export const useEditImage = () => {
     fSize = 62,
     x = 100,
     y = 100,
-    text = "",
-    strokeStyle = "#000",
+    text = '',
+    strokeStyle = '#000',
     lineWidth = 0,
     isTextAlignCenter = false,
-    color = "#000",
+    color = '#000',
     shouldShowShadow = false,
     hasStroke = false,
-    backgroundColor = "transparent",
+    backgroundColor = 'transparent',
   }: writeTextProps) => {
     if (canvasRef.value === null) {
       return;
     }
     const canvas = canvasRef.value;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (ctx === null) {
       return;
     }
@@ -274,7 +272,7 @@ export const useEditImage = () => {
       return;
     }
     const canvas = canvasRef.value;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext('2d');
     if (ctx === null) {
       return;
     }
@@ -294,7 +292,7 @@ export const useEditImage = () => {
     }
     const cWidth = canvasRef.value.width;
     const cHeight = canvasRef.value.height;
-    const ctx = canvasRef.value.getContext("2d");
+    const ctx = canvasRef.value.getContext('2d');
     if (ctx === null) {
       return;
     }
@@ -304,12 +302,11 @@ export const useEditImage = () => {
       for (let j = 0; j < cWidth; j++) {
         const pix = (i * cWidth + j) * 4;
         /* Gray */
-        const gray =
-          0.299 * image.data[pix] +
-          0.587 * image.data[pix + 1] +
-          0.114 * image.data[pix + 2];
+        const gray = 0.299 * image.data[pix]
+          + 0.587 * image.data[pix + 1]
+          + 0.114 * image.data[pix + 2];
         for (let k = 0; k < 3; k++) {
-          dst.data[pix + k] = image.data[pix + k] = gray;
+          dst.data[pix + k] = gray;
         }
         /* Sepia */
         dst.data[pix] = (dst.data[pix] / 255) * 240;
@@ -325,7 +322,7 @@ export const useEditImage = () => {
     if (canvasRef.value === null) {
       return;
     }
-    const ctx = canvasRef.value.getContext("2d");
+    const ctx = canvasRef.value.getContext('2d');
     if (ctx === null) {
       return;
     }
@@ -340,7 +337,7 @@ export const useEditImage = () => {
       0,
       0,
       prop.width,
-      prop.height
+      prop.height,
     );
   };
   const area2CanvasArea = (area: ISelectedArea) => {

@@ -2,10 +2,7 @@
   "compilerOptions": {
     "target": "es2017",
     "module": "esnext",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
+    "lib": ["esnext", "dom"],
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": true,
@@ -15,10 +12,6 @@
     "baseUrl": ".",
     "jsx": "preserve"
   },
-  "include": [
-    "src", "index.ts"
-  ],
-  "exclude": [
-    "node_modules",
-  ]
+  "include": ["src", "index.ts"],
+  "exclude": ["node_modules"]
 }
