@@ -1,4 +1,4 @@
-import { computed, ref, Ref } from "vue-demi";
+import { computed, ref, Ref } from "vue";
 import { useEventListener } from "@vueuse/core";
 import { useSelectedArea } from "../shared/useSelectedArea";
 import { ISelectedArea } from "../shared/types";
@@ -11,16 +11,12 @@ export const useMaskInfo = (
     // options should have color.
   }
 ) => {
-  const {
-    resolvedSelectedArea,
-    resetSelectedArea,
-    isDragging,
-    isOutside,
-  } = useSelectedArea(canvasRef, {
-    ...(optoins.aspectHeightRatio
-      ? { selectAspectHeightRatio: optoins.aspectHeightRatio }
-      : {}),
-  });
+  const { resolvedSelectedArea, resetSelectedArea, isDragging, isOutside } =
+    useSelectedArea(canvasRef, {
+      ...(optoins.aspectHeightRatio
+        ? { selectAspectHeightRatio: optoins.aspectHeightRatio }
+        : {}),
+    });
 
   const maskAreaStyle = computed(() => {
     return {

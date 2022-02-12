@@ -1,4 +1,4 @@
-import { ref, Ref } from "vue-demi";
+import { ref, Ref } from "vue";
 import { ISelectedArea } from "../shared/types";
 
 type writeTextProps = {

@@ -4,7 +4,6 @@ import { terser } from "rollup-plugin-terser";
 import pkg from "./package.json";
 
 const globals = {
-  "vue-demi": "VueDemi",
   "@vueuse/core": "VueUse",
 };
 
