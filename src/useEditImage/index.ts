@@ -1,4 +1,4 @@
-import { ref, Ref } from "vue-demi";
+import { ref, Ref } from "@vue/composition-api";
 import { ISelectedArea } from "../shared/types";
 
 type writeTextProps = {
@@ -114,6 +114,7 @@ export const useEditImage = () => {
       maxImageSide?: number;
     }
   ) => {
+    console.log("draw");
     if (canvasRef.value === null || imageRef.value === null) {
       return;
     }

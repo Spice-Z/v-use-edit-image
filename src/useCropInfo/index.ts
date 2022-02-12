@@ -1,4 +1,4 @@
-import { computed, reactive, Ref } from "vue-demi";
+import { computed, reactive, Ref } from "@vue/composition-api";
 import { useEventListener } from "@vueuse/core";
 import { useSelectedArea } from "../shared/useSelectedArea";
 

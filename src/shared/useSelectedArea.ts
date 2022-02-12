@@ -1,4 +1,4 @@
-import { ref, reactive, Ref, computed } from "vue-demi";
+import { ref, reactive, Ref, computed } from "@vue/composition-api";
 import { useMouseInElement, useEventListener } from "@vueuse/core";
 
 export const useSelectedArea = (
@@ -44,32 +44,28 @@ export const useSelectedArea = (
     selectedArea.height = initial.height;
   };
 
-  const resolvedSelectedArea = computed(
-    (): IselectedArea => {
-      const width =
-        selectedArea.width < 0 ? selectedArea.width * -1 : selectedArea.width;
-      const height =
-        selectedArea.height < 0
-          ? selectedArea.height * -1
-          : selectedArea.height;
-      const x =
-        selectedArea.width < 0
-          ? selectedArea.start.x - width
-          : selectedArea.start.x;
-      const y =
-        selectedArea.height < 0
-          ? selectedArea.start.y - height
-          : selectedArea.start.y;
-      return {
-        start: {
-          x,
-          y,
-        },
-        width,
-        height,
-      };
-    }
-  );
+  const resolvedSelectedArea = computed((): IselectedArea => {
+    const width =
+      selectedArea.width < 0 ? selectedArea.width * -1 : selectedArea.width;
+    const height =
+      selectedArea.height < 0 ? selectedArea.height * -1 : selectedArea.height;
+    const x =
+      selectedArea.width < 0
+        ? selectedArea.start.x - width
+        : selectedArea.start.x;
+    const y =
+      selectedArea.height < 0
+        ? selectedArea.start.y - height
+        : selectedArea.start.y;
+    return {
+      start: {
+        x,
+        y,
+      },
+      width,
+      height,
+    };
+  });
 
   useEventListener("mousedown", (_) => {
     isDragging.value = true;
