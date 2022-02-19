@@ -1,0 +1,15 @@
+{
+  "name": "@use-edit-image/react",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+  "lint": "eslint . --ext .js,.ts --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Spice-Z/v-use-edit-image.git"
+  },
+  "author": "",
+  "license": "ISC"
+}
