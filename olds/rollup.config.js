@@ -2,7 +2,7 @@ import typescript from 'rollup-plugin-typescript2';
 import dts from 'rollup-plugin-dts';
 import { terser } from 'rollup-plugin-terser';
 import eslint from '@rollup/plugin-eslint';
-import pkg from './package.json';
+import pkg from './olds/package.json';
 
 const globals = {
   '@vueuse/core': 'VueUse',
