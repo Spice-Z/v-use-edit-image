@@ -16,9 +16,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
-        working-directory: ./olds
-      - run: npm run build
-        working-directory: ./olds
+      - run: cd olds/ && npm install && npm run build
         env:
           CI: true
