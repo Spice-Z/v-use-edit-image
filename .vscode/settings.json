@@ -1,2 +1,4 @@
 {
+  "eslint.nodePath": "./node_modules",
+  "eslint.runtime": "~/.nodenv/shims/node",
 }
