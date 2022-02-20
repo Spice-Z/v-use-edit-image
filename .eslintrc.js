@@ -3,6 +3,7 @@ module.exports = {
   env: {
     browser: true,
     es2021: true,
+    'jest/globals': true,
   },
   extends: ['airbnb-base'],
   parser: '@typescript-eslint/parser',
@@ -30,7 +31,7 @@ module.exports = {
     'no-plusplus': 'off',
     'no-shadow': 'off',
     'no-underscore-dangle': 'off',
-    'no-param-reassign': 'off'
+    'no-param-reassign': 'off',
   },
   settings: {
     'import/parsers': {

@@ -2,7 +2,9 @@
  "private": true,
  "version": "0.0.0",
  "description": "",
- "scripts": {},
+ "scripts": {
+  "test": "NODE_ENV=test jest"
+},
  "author": "Spice-Z<https://github.com/Spice-Z/>",
  "license": "MIT",
  "repository": {
