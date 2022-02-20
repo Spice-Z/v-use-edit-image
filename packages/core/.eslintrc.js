@@ -1,3 +1,1 @@
-module.exports = {
-  'jest/globals': true,
-};
+module.exports = {};
