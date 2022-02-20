@@ -1,4 +1,8 @@
 {
-  "eslint.nodePath": "./node_modules",
-  "eslint.runtime": "~/.nodenv/shims/node",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.workingDirectories": [
+    "./packages/core"
+  ],
 }
