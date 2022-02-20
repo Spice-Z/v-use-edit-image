@@ -1,1 +1,1 @@
-export * from './clipRect'
+export * from './clipRect';
