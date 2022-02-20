@@ -2,7 +2,5 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
-  "eslint.workingDirectories": [
-    "./packages/core"
-  ],
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }
