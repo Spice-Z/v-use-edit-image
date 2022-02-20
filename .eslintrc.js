@@ -28,6 +28,9 @@ module.exports = {
     'no-unused-vars': ['error', { argsIgnorePattern: '^_$' }],
     'no-nested-ternary': 'off',
     'no-plusplus': 'off',
+    'no-shadow': 'off',
+    'no-underscore-dangle': 'off',
+    'no-param-reassign': 'off'
   },
   settings: {
     'import/parsers': {
