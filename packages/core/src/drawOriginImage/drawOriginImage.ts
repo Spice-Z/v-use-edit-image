@@ -1,3 +1,5 @@
+import { setCanvasSize } from '../utils';
+
 type Props = {
  canvas: HTMLCanvasElement,
  image: HTMLImageElement,
@@ -5,11 +7,6 @@ type Props = {
    maxImageSide?: number;
  },
 }
-
-const _setCanvasSize = (canvas:HTMLCanvasElement, width: number, height: number) => {
-  canvas.width = width;
-  canvas.height = height;
-};
 
 export const drawOriginImage = async (
   {
@@ -27,14 +24,14 @@ export const drawOriginImage = async (
     if (imageWidth > imageHeight) {
       const resolvedWidth = options.maxImageSide;
       const resolvedHeight = imageHeight * (options.maxImageSide / imageWidth);
-      _setCanvasSize(canvas, resolvedWidth, resolvedHeight);
+      setCanvasSize(canvas, resolvedWidth, resolvedHeight);
     } else {
       const resolvedHeight = options.maxImageSide;
       const resolvedWidth = imageWidth * (options.maxImageSide / imageHeight);
-      _setCanvasSize(canvas, resolvedWidth, resolvedHeight);
+      setCanvasSize(canvas, resolvedWidth, resolvedHeight);
     }
   } else {
-    _setCanvasSize(canvas, imageWidth, imageHeight);
+    setCanvasSize(canvas, imageWidth, imageHeight);
   }
   const ctx = canvas.getContext('2d');
   if (ctx === null) {
