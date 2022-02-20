@@ -1,5 +1,5 @@
 type Props = {
- canvas: HTMLCanvasElement
+  canvas: HTMLCanvasElement
 }
 
 export const makeImageGraySepia = ({ canvas }:Props) => {

@@ -2,14 +2,23 @@
   "name": "use-edit-image",
   "version": "0.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint . --ext .js,.ts, --fix"
+    "lint": "eslint . --ext .js,.ts",
+    "lintfix": "eslint . --ext .js,.ts, --fix",
+    "build": "npm run lint && rollup -c"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Spice-Z/v-use-edit-image.git"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "@rollup/plugin-eslint": "^8.0.1",
+    "rollup": "^2.67.3",
+    "rollup-plugin-dts": "^4.1.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.31.2"
+  }
 }
