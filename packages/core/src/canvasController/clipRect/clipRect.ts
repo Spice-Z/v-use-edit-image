@@ -1,4 +1,5 @@
-import { setCanvasSize } from '../utils';
+import { setCanvasSize } from "../utils";
+
 
 type Props = {
   canvas: HTMLCanvasElement,
