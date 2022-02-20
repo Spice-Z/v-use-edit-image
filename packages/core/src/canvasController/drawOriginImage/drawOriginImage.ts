@@ -1,11 +1,11 @@
 import { setCanvasSize } from '../utils';
 
 type Props = {
- canvas: HTMLCanvasElement,
- image: HTMLImageElement,
- options?: {
-   maxImageSide?: number;
- },
+  canvas: HTMLCanvasElement,
+  image: HTMLImageElement,
+  options?: {
+    maxImageSide?: number;
+  },
 }
 
 export const drawOriginImage = async (
@@ -18,7 +18,7 @@ export const drawOriginImage = async (
   const imageWidth = image.naturalWidth;
   const imageHeight = image.naturalHeight;
   const shouldResize = options?.maxImageSide
-   && (imageWidth > options.maxImageSide || imageHeight > options.maxImageSide);
+    && (imageWidth > options.maxImageSide || imageHeight > options.maxImageSide);
   // TODO:refactor
   if (options?.maxImageSide && shouldResize) {
     if (imageWidth > imageHeight) {
