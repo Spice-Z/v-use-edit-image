@@ -12,6 +12,5 @@
     "baseUrl": ".",
     "jsx": "preserve"
   },
-  "include": ["src", "index.ts"],
   "exclude": ["node_modules"]
 }
