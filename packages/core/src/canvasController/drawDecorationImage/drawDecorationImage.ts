@@ -1,25 +1,25 @@
 type Props = {
- canvas: HTMLCanvasElement,
- decorationImage: HTMLImageElement,
- sizePer: number,
- dxPer: 'auto' | 'right' | number,
- dyPer: 'auto' | 'right' | number,
+  canvas: HTMLCanvasElement,
+  decorationImage: HTMLImageElement,
+  sizePer?: number,
+  dxPer?: 'center' | 'right' | number,
+  dyPer?: 'center' | 'bottom' | number,
 }
 
-  type Return = {
-   dWidth: number;
-   dHeight: number;
-   dx: number;
-   dy: number;
- };
+type Return = {
+  dWidth: number;
+  dHeight: number;
+  dx: number;
+  dy: number;
+};
 
 export const drawDecorationImage = async (
   {
     canvas,
     decorationImage,
     sizePer = 100,
-    dxPer = 'auto',
-    dyPer = 'auto',
+    dxPer = 0,
+    dyPer = 0,
   }:Props,
 ): Promise<Return> => {
   const ctx = canvas.getContext('2d');
@@ -32,20 +32,18 @@ export const drawDecorationImage = async (
   const sHeight = decorationImage.naturalHeight;
   const dWidth = (canvas.width / 100) * sizePer;
   const dHeight = ((decorationImage.naturalHeight
-       * (canvas.width / decorationImage.naturalWidth))
-       / 100)
-     * sizePer;
-  const dx = dxPer === 'auto'
-    ? (canvas.width / 100) * ((100 - sizePer) / 2)
+       * (canvas.width / decorationImage.naturalWidth)) / 100) * sizePer;
+  const dx = dxPer === 'center'
+    ? (canvas.width / 2) - (dWidth / 2)
     : dxPer === 'right'
       ? canvas.width - dWidth
       : (canvas.width / 100) * dxPer;
 
-  const dy = dyPer === 'auto'
-    ? canvas.height - dHeight - canvas.height * 0.05
-    : dyPer === 'right'
+  const dy = dyPer === 'center'
+    ? (canvas.height / 2) - (dHeight / 2)
+    : dyPer === 'bottom'
       ? canvas.height - dHeight
-      : (canvas.width / 100) * dyPer;
+      : (canvas.height / 100) * dyPer;
 
   await ctx.drawImage(
     decorationImage,
