@@ -3,7 +3,7 @@
 <p align="center">
 <img src="https://user-images.githubusercontent.com/15419227/103265552-34feec80-49f1-11eb-8676-1cb6b73fb5cb.png" width="300"/><br>
 <a href="https://www.npmjs.com/package/v-use-edit-image" target="__blank"><img alt="NPM Version" src="https://img.shields.io/npm/v/v-use-edit-image"/></a>
-<img alt="build test" src="https://github.com/Spice-Z/v-use-edit-image/workflows/build%20test/badge.svg"/>
+<!-- <img alt="build test" src="https://github.com/Spice-Z/v-use-edit-image/workflows/build%20test/badge.svg"/> -->
 </p>
 
 v-use-edit-image is a Vue Composition API library for editing image with canvas API.

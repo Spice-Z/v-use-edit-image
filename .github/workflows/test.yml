@@ -1,4 +1,4 @@
-name: build test
+name: test
 
 on: [push]
 
@@ -16,6 +16,5 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: cd olds/ && npm install && npm run build
-        env:
-          CI: true
+      - run: npm run ci
+      - run: npm run test
