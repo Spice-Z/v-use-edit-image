@@ -1,4 +1,6 @@
 type OptionProps = {
+  canvas: HTMLCanvasElement,
+  text: string,
   fSize?: number;
   x?: number;
   y?: number | 'bottom';
@@ -13,12 +15,12 @@ type OptionProps = {
 };
 
 export const writeText = (
-  canvas: HTMLCanvasElement,
-  text: string,
   {
-    fSize = 62,
-    x = 100,
-    y = 100,
+    canvas,
+    text,
+    fSize = 24,
+    x = 0,
+    y = 0,
     fonts = 'ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "メイリオ", "Meiryo", "verdana", sans-serif',
     strokeStyle = '#000',
     lineWidth = 0,
@@ -53,6 +55,7 @@ export const writeText = (
   }
 
   const lineHeight = fSize * 1.1618;
+  const renderdTexts:string[] = [];
   text.split('\n').forEach((t, i, a) => {
     const y = posY - lineHeight * (a.length - (i + 1));
     if (backgroundColor) {
@@ -66,5 +69,8 @@ export const writeText = (
     if (hasStroke) {
       ctx.strokeText(t, x, y);
     }
+    renderdTexts.push(t);
   });
+
+  return { renderdTexts };
 };
