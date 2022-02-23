@@ -8,7 +8,7 @@ type Props = {
   height: number;
 };
 
-export const resize2CanvasSize = ({
+export const resizeArea2CanvasSize = ({
   canvas,
   start,
   width,

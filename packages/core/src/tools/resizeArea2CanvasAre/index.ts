@@ -1,1 +1,1 @@
-export * from './resize2CanvasSize';
+export * from './resizeArea2CanvasSize';
