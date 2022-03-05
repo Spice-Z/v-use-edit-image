@@ -15,7 +15,7 @@ describe('drawOriginImage', () => {
 
     const image = await dataUrlToImage('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoBAMAAAB+0KVeAAAAFVBMVEUAAAD///8/Pz+/v78fHx9/f3+fn5/z3jLhAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAJ0lEQVQokWNgGKZA2RgMFFAEXUNDA1NDQx3QFTsqoIuMCtJHcLgAACjwCtfPR6QgAAAAAElFTkSuQmCC');
 
-    drawOriginImage({ canvas, image });
+    await drawOriginImage({ canvas, image });
 
     expect(canvas.width).toBe(image.naturalWidth);
     expect(canvas.height).toBe(image.naturalHeight);
