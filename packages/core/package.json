@@ -1,20 +1,26 @@
 {
   "name": "use-edit-image",
-  "version": "0.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "This is Canvas API wrapper package.",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/index.esm.js",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "lint": "eslint . --ext .js,.ts",
     "lintfix": "eslint . --ext .js,.ts, --fix",
     "build": "npm run lint && rollup -c",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "release": "npm run test && rollup -c && npm publish"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Spice-Z/v-use-edit-image.git"
+    "url": "https://github.com/Spice-Z/v-use-edit-image"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Spice-Z<https://github.com/Spice-Z/>",
+  "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.17.5",
     "@babel/preset-env": "^7.16.11",
