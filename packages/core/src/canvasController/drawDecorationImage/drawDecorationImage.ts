@@ -4,6 +4,7 @@ type Props = {
   sizePer?: number,
   dxPer?: 'center' | 'right' | number,
   dyPer?: 'center' | 'bottom' | number,
+  dyFrom?: 'top' | 'bottom',
 }
 
 type Return = {
@@ -20,6 +21,7 @@ export const drawDecorationImage = async (
     sizePer = 100,
     dxPer = 0,
     dyPer = 0,
+    dyFrom = 'top',
   }:Props,
 ): Promise<Return> => {
   const ctx = canvas.getContext('2d');
@@ -39,11 +41,16 @@ export const drawDecorationImage = async (
       ? canvas.width - dWidth
       : (canvas.width / 100) * dxPer;
 
-  const dy = dyPer === 'center'
-    ? (canvas.height / 2) - (dHeight / 2)
-    : dyPer === 'bottom'
-      ? canvas.height - dHeight
-      : (canvas.height / 100) * dyPer;
+  let dy = 0;
+  if (dyPer === 'center') {
+    dy = (canvas.height / 2) - (dHeight / 2);
+  } else if (dyPer === 'bottom') {
+    dy = canvas.height - dHeight;
+  } else if (dyFrom === 'top') {
+    dy = (canvas.height / 100) * dyPer;
+  } else if (dyFrom === 'bottom') {
+    dy = canvas.height - dHeight - (canvas.height / 100) * dyPer;
+  }
 
   await ctx.drawImage(
     decorationImage,
