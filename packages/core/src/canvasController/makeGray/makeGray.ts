@@ -21,6 +21,7 @@ export const makeImageGray = ({ canvas }:Props) => {
       for (let k = 0; k < 3; k++) {
         dst.data[pix + k] = gray;
       }
+      dst.data[pix + 3] = image.data[pix + 3];
     }
   }
   ctx.putImageData(dst, 0, 0);
