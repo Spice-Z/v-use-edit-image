@@ -17,7 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "@vueuse/core": "^7.5.5",
-    "vue-demi": "^0.12.1"
+    "vue-demi": "^0.13.2"
   },
   "devDependencies": {
     "rollup": "^2.32.1",
