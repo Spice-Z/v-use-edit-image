@@ -1,6 +1,6 @@
 {
   "name": "use-edit-image",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "This is Canvas API wrapper package.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

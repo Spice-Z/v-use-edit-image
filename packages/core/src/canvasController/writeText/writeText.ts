@@ -8,6 +8,7 @@ type OptionProps = {
   strokeStyle?: string;
   lineWidth?: number;
   textAlign?: 'left' | 'right' | 'center' | 'start' | 'end';
+  multilineTextAlign?:'top'|'center'|'bottom';
   color?: string;
   shouldShowShadow?: boolean;
   hasStroke?: false;
@@ -25,6 +26,7 @@ export const writeText = (
     strokeStyle = '#000',
     lineWidth = 0,
     textAlign = 'start',
+    multilineTextAlign = 'center',
     color = '#000',
     shouldShowShadow = false,
     hasStroke = false,
@@ -41,7 +43,7 @@ export const writeText = (
   ctx.textAlign = textAlign;
   ctx.strokeStyle = strokeStyle;
   ctx.lineWidth = lineWidth;
-  const posY = y === 'bottom' ? canvas.height - fSize : y;
+  const basePosY = y === 'bottom' ? canvas.height - fSize : y;
   if (shouldShowShadow) {
     ctx.shadowColor = '#000';
     ctx.shadowBlur = 6;
@@ -56,8 +58,16 @@ export const writeText = (
 
   const lineHeight = fSize * 1.1618;
   const renderdTexts:string[] = [];
-  text.split('\n').forEach((t, i, a) => {
-    const y = posY - lineHeight * (a.length - (i + 1));
+  text.split('\n').forEach((t, i, all) => {
+    const allLineCount = all.length;
+    let y = 0;
+    if (multilineTextAlign === 'center' && allLineCount > 1) {
+      y = basePosY - lineHeight * (allLineCount - (i + 1)) + lineHeight * (allLineCount / 2);
+    } else if (multilineTextAlign === 'top' && allLineCount > 1) {
+      y = basePosY + lineHeight * (i);
+    } else {
+      y = basePosY - lineHeight * (allLineCount - (i + 1));
+    }
     if (backgroundColor) {
       ctx.fillStyle = backgroundColor;
       const bgW = ctx.measureText(t).width * 1.1;
