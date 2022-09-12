@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "v-use-edit-image": "^0.7.2",
-    "vue": "^3.0.4"
+    "vue": "^3.2.39"
   },
   "devDependencies": {
     "vite": "^2.7.13",
